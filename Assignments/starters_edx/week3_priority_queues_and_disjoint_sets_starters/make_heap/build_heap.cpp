@@ -30,7 +30,7 @@ class HeapBuilder {
       sortedArr.push_back(data_[0]);
       swap(data_[0], data_[data_.size() - 1]);
       data_.pop_back();
-      siftDown(data_, 1, swaps_);
+      siftDown(data_, 0, swaps_);
     }
 
     for(auto d : sortedArr) {
@@ -66,29 +66,29 @@ class HeapBuilder {
     */
     
     // Build Min Heap in-place
-    for(int i = data_.size() / 2; i > 0; i--) {
+    for(int i = (data_.size() / 2) - 1; i >= 0; i--) {
       siftDown(data_, i, swaps_);
     }
 
   }
 
-  //use non-zero index
+  //use zero based
   void siftDown(vector<int>& data, int index, vector<pair<int,int>>& swapPairs) {
-    int size = data.size();
+    int size = data.size() - 1;
     int maxIndex = index;
-    int leftIndex = 2 * index;
-    int rightIndex = 2 * index + 1;
+    int leftIndex = 2 * index + 1;
+    int rightIndex = 2 * index + 2;
 
-    if(leftIndex <= size && data[leftIndex - 1] < data[maxIndex - 1]) {
+    if(leftIndex <= size && data[leftIndex] < data[maxIndex]) {
       maxIndex = leftIndex;
     }
-    if(rightIndex <= size && data[rightIndex - 1] < data[maxIndex - 1]) {
+    if(rightIndex <= size && data[rightIndex] < data[maxIndex]) {
       maxIndex = rightIndex;
     }
 
     if(index != maxIndex) {
-      swap(data[index - 1], data[maxIndex - 1]);
-      swapPairs.push_back(make_pair(index - 1, maxIndex - 1));
+      swap(data[index], data[maxIndex]);
+      swapPairs.push_back(make_pair(index, maxIndex));
       siftDown(data, maxIndex, swapPairs);
     }
 
