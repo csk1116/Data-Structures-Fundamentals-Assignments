@@ -29,16 +29,41 @@ struct DisjointSets {
 
 	int getParent(int table) {
 		// find parent and compress path
+		if(sets[table].parent == table)
+			return table;
+		return sets[table].parent = getParent(sets[table].parent);
 	}
 
 	void merge(int destination, int source) {
+		if(destination == source)
+			return;
+
 		int realDestination = getParent(destination);
 		int realSource = getParent(source);
 		if (realDestination != realSource) {
 			// merge two components
 			// use union by rank heuristic
-                        // update max_table_size
-		}		
+			if(sets[realSource].rank >= sets[realDestination].rank)
+			{
+				sets[realDestination].parent = realSource;
+				sets[realSource].size += sets[realDestination].size;
+				// update max_table_size
+			max_table_size = max(sets[realSource].size, max_table_size);
+				if(sets[realSource].rank == sets[realDestination].rank)
+				{
+					sets[realSource].rank ++;
+				}
+			}
+			else{
+				sets[realSource].parent = realDestination;
+				sets[realDestination].size += sets[realSource].size;
+				// update max_table_size
+			max_table_size = max(max_table_size, sets[realDestination].size);
+			}
+        	
+
+		}	
+
 	}
 };
 
