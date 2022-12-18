@@ -91,8 +91,8 @@ public:
     PhoneBook(int phoneMaxDigits)
     {
         numberOfKeys = 0;
-        tableSize = 100;
-        hashTable.resize(100);
+        tableSize = 2;
+        hashTable.resize(2);
         setPrime(phoneMaxDigits);
         generateRandAnB();
     }
@@ -207,11 +207,7 @@ private:
             if (!tempHashTable[i].empty())
             {
                 for (auto p : tempHashTable[i])
-                {
-                    int hash = hashing(p.first);
-                    hashTable[hash].push_back(make_pair(p.first, p.second));
-                    // std::cout << p.first << " " << p.second << std::endl;
-                }
+                    insert(p.first, p.second);
             }
         }
         tempHashTable.clear();
