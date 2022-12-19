@@ -16,9 +16,11 @@ struct Node {
   Node(int key_, int left_, int right_) : key(key_), left(left_), right(right_) {}
 };
 
-bool IsBinarySearchTree(const vector<Node>& tree) {
+bool IsBinarySearchTree(const vector<Node> &tree)
+{
   // Implement correct algorithm here
-  return true;
+  bool isValid = true;
+  return isValid;
 }
 
 int main() {
@@ -30,7 +32,7 @@ int main() {
     cin >> key >> left >> right;
     tree.push_back(Node(key, left, right));
   }
-  if (IsBinarySearchTree(tree) {
+  if (IsBinarySearchTree(tree)) {
     cout << "CORRECT" << endl;
   } else {
     cout << "INCORRECT" << endl;
