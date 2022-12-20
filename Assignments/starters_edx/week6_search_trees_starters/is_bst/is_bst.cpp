@@ -19,7 +19,7 @@ struct Node
 
 static bool isFirstNode = true;
 
-void dfs(const vector<Node> &tree, Node root, bool &isValid, int &prev)
+void dfs(const vector<Node> &tree, const Node &root, bool &isValid, int &prev)
 {
   if (root.left == -1 && root.right == -1)
   {
